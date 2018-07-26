@@ -1,0 +1,18 @@
+﻿<Window x:Class="Depths.MapEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Depths"
+        mc:Ignorable="d"
+        Title="MapEditor" Height="211.333" Width="478.5">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="66" Margin="360,10,0,0" VerticalAlignment="Top" Width="100" Source="Resource/mapeditor.png"/>
+        <Button x:Name="saveButton" Content="Save Map" HorizontalAlignment="Left" Margin="385,150,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
+        <TextBox x:Name="valueBox" HorizontalAlignment="Left" Height="18" Margin="10,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,22,0,0" TextWrapping="Wrap" Text="Map object at: " VerticalAlignment="Top"/>
+        <TextBox x:Name="atBox" HorizontalAlignment="Left" Height="18" Margin="94,22,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="nextButton" Content="Next" HorizontalAlignment="Left" Margin="139,43,0,0" VerticalAlignment="Top" Width="45" Click="nextButton_Click"/>
+
+    </Grid>
+</Window>
