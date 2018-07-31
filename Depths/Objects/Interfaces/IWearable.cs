@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Interfaces
 {
-    interface IWearable
+    public interface IWearable
     {
         int GetSlot();
     }

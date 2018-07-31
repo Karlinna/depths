@@ -42,5 +42,10 @@ namespace Depths
             MapEditor me = new MapEditor();
             me.Show();
         }
+
+        private void continue_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

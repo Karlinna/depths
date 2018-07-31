@@ -54,11 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GameWindow.xaml">
+    <Page Include="CharacterCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Interpreter\CharacterCreation.xaml">
+    <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,13 +70,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CharacterCreation.xaml.cs">
+      <DependentUpon>CharacterCreation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interpreter\AmbigiousCharacterDefinedException.cs" />
-    <Compile Include="Interpreter\CharacterCreation.xaml.cs">
-      <DependentUpon>CharacterCreation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interpreter\NotDefinedCharacter.cs" />
     <Compile Include="Interpreter\Reader.cs" />
     <Compile Include="Interpreter\Story.cs" />
@@ -149,6 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\mapeditor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\female\human_female_rogue.gif" />
+    <Resource Include="Resource\female\human_female_warrior.gif" />
+    <Resource Include="Resource\male\human_male_mage.gif" />
+    <Resource Include="Resource\male\human_male_warrior.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

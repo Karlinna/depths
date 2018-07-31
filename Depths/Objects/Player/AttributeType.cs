@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    enum AttributeType
+    public enum AttributeType
     {
         STR, AGI, INT, STA
     }

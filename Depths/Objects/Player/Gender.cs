@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    enum Gender
+    public enum Gender
     {
         MALE, FEMALE, OTHER
     }

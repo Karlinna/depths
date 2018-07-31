@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Structs
 {
-    abstract class Healer : Attacker, IHealer, IHealable
+    public abstract class Healer : Attacker, IHealer, IHealable
     {
         protected Healer(int health, int mana, bool isD, int healthMax, int baseDamage, double coeff)
             : base (health, mana,  isD,  healthMax,  baseDamage,  coeff)

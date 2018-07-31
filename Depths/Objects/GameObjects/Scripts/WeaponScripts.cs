@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.GameObjects.Scripts
 {
-    static class WeaponScripts       
+    public static class WeaponScripts       
     {
         
     }

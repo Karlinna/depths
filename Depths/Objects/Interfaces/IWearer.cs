@@ -2,7 +2,7 @@
 
 namespace Depths.Objects.Interfaces
 {
-    interface IWearer
+    public interface IWearer
     {
         Inventory EquippedItems { get; }
     }

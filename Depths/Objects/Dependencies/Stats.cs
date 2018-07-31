@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Dependencies
 {
-    class Stats<K, V> where V : struct
+    public class Stats<K, V> where V : struct
     {
         protected List<K> ListOfKey = new List<K>();
         protected List<V> ListOfValues = new List<V>();

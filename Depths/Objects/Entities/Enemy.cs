@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    class Enemy : Attacker, ITalk
+    public class Enemy : Attacker, ITalk
     { 
         public string Name { get; }
 
 
-        protected Enemy(string name, int health, int mana, bool isD, int healthMax,
+        public Enemy(string name, int health, int mana, bool isD, int healthMax,
             int baseDamage, double coeff) : 
             base (health, mana, isD, healthMax,
             baseDamage, coeff)

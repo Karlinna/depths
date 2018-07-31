@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Depths"
         mc:Ignorable="d"
-        Title="Depths" Height="339.908" Width="355.505">
+        Title="Depths" Height="402.34" Width="355.505">
     <Grid>
         <Button x:Name="newGame_Button" Content="New Game" HorizontalAlignment="Left" Margin="88,60,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="newGame_Button_Click"/>
-        <Button x:Name="options_Button" Content="Options" HorizontalAlignment="Left" Margin="88,132,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="options_Button_Click"/>
-        <Button x:Name="exit_Button" Content="Exit" HorizontalAlignment="Left" Margin="88,206,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="exit_Button_Click"/>
+        <Button x:Name="options_Button" Content="Options" HorizontalAlignment="Left" Margin="88,179,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="options_Button_Click"/>
+        <Button x:Name="exit_Button" Content="Exit" HorizontalAlignment="Left" Margin="88,250,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="exit_Button_Click"/>
+        <Button x:Name="continue_Button" Content="Continue" HorizontalAlignment="Left" Margin="88,120,0,0" VerticalAlignment="Top" Width="160" Height="46" Click="continue_Button_Click" IsEnabled="False" />
 
     </Grid>
 </Window>

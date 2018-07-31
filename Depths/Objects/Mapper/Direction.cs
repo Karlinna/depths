@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    enum Direction
+    public enum Direction
     {
-        UP, RIGHT, DOWN, LEFT, NONE
+        NONE, UP, RIGHT, DOWN, LEFT
         
     }
 }

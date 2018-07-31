@@ -29,13 +29,16 @@ namespace Depths.Interpreter
                 else if (IsEnemy(line))
                 {
                     string[] data = GetDataFromRow(line, "enemy");
-                    Enemy e = null;
+                    Enemy e = new Enemy(data[0], int.Parse(data[1]),
+                        int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4]),
+                        int.Parse(data[5]), double.Parse(data[5]));
                     s.AddEnemy(e);
                 }
                 else if (IsCharacter(line))
                 {
                     string[] data = GetDataFromRow(line, "character");
-                    NPC n = new NPC(data[0]);
+                    NPC n = new NPC(data[0],
+                        data[1] == "M" ? Gender.MALE : data[1] == "F" ? Gender.FEMALE : Gender.OTHER);
                     s.AddNPC(n);
                 }
                 else if (IsStoryboard(line))
@@ -43,8 +46,15 @@ namespace Depths.Interpreter
                     string[] story = line.Split('-');
                     string[] type = story[0].Split(':');
 
+                    if(story[0] == "player")
+                    {
+                        s.AddStoryBoard(p, story[1]);
+                        if (s.p == null) s.p = p;
+                    }
+
                     if (type.Length < 2)
                     {
+                        if (story[0] == "player") continue;
                         if (s.GetNpcByName(story[0]) != null &&
                             s.GetEnemyByName(story[0]) != null)
                             throw new AmbigiousCharacterDefinedException(story[0]);
@@ -52,25 +62,22 @@ namespace Depths.Interpreter
                         Enemy e = null;
                         if (c == null) { e = s.GetEnemyByName(story[0]); s.AddStoryBoard(e, story[1]); }
                         else s.AddStoryBoard(c, story[1]);
-                    }
-                    else if (story[0] == "player")
+                    }     
+                    if(type[0] == "enemy")
                     {
-                        s.AddStoryBoard(p, story[1]);
+                        Enemy e = s.GetEnemyByName(type[1]);
+                        s.AddStoryBoard(e, story[1]);
                     }
-                    else if (type[0] == "enemy")
+                    if(type[0] == "character")
                     {
-                        Enemy c = s.GetEnemyByName(type[1]);
-                        s.AddStoryBoard(c, story[1]);
-                    }
-                    else
-                    {
-                        NPC c = s.GetNpcByName(type[1]);
-                        s.AddStoryBoard(c, story[1]);
+                        NPC e = s.GetNpcByName(type[1]);
+                        s.AddStoryBoard(e, story[1]);
                     }
                 }
 
             }
             sr.Close();
+            s.FormatText();
             return s;
         }
         #region Interpreter Methods

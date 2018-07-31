@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    class Attribute
+    public class Attribute
     {
         private AttributeType Type;
         public int Value { get; private set; }

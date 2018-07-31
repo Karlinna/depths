@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    class Dialogue<K, V>
+    public class Dialogue<K, V>
     {
         protected List<K> ListOfKey = new List<K>();
         protected List<V> ListOfValues = new List<V>();
@@ -24,6 +24,10 @@ namespace Depths.Objects
         {
             return ListOfValues[i];
         }
-
+        public void SetValue(int i, V value)
+        {
+            ListOfValues[i] = value;
+        }
+        public int Count => ListOfKey.Count;
     }
 }

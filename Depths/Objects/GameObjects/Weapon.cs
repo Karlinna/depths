@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.GameObjects
 {
-    class Weapon : Item, IWearable
+    public  class Weapon : Item, IWearable
     {
         private delegate void WeaponScript();
         private WeaponScript Script { set; get; }

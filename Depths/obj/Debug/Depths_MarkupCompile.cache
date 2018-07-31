@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Márk\Desktop\Depths\Depths\Depths\obj\Debug\
+C:\Users\IBM_ADMIN\source\repos\depths2\Depths\obj\Debug\
 Depths
 none
 false
 DEBUG;TRACE
-C:\Users\Márk\Desktop\Depths\Depths\Depths\App.xaml
-4230906211
+C:\Users\IBM_ADMIN\source\repos\depths2\Depths\App.xaml
+4786913629
 
-41-716719491
+41-643640581
 131569487696
-GameWindow.xaml;Interpreter\CharacterCreation.xaml;MainWindow.xaml;MapEditor.xaml;
+CharacterCreation.xaml;GameWindow.xaml;MainWindow.xaml;MapEditor.xaml;
 
 False
 

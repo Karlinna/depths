@@ -1,7 +1,10 @@
-enemy(Test,100,100,10,10)
-character(Jozsef)
+enemy(Test,100,100,false,100,10,10)
+character(Jozsef, M)
 
 enemy:Test-"Hello There General Kenobi"
 Jozsef-"Test it now"
 character:Jozsef-"test this too"
 Test-"hahahaha"
+player-"Well, met..."
+Jozsef-"Hey, %player%. How you doin?"
+Jozsef-"You look like a %class%."

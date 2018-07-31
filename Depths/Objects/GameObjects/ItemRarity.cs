@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.GameObjects
 {
-    enum ItemRarity
+    public enum ItemRarity
     {
         JUNK, COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, ETHEREAL
     }

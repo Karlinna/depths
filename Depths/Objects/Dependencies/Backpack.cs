@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Dependencies
 {
-    class Backpack
+    public class Backpack
     {
         public int Capacity { get; set; }
         private List<Item> Items = new List<Item>();

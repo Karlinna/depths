@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    interface IAttacker
+    public interface IAttacker
     {
         int BaseDamage { get; } //Only phsycal for now
 

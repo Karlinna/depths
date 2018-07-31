@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    enum PlayerClass
+    public enum PlayerClass
     {
-        WARRIOR, MAGE, PRIEST
+        WARRIOR, MAGE, ROGUE
     }
 }

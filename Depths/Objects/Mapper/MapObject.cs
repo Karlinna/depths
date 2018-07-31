@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    class MapObject
+    public  class MapObject
     {
     }
 }

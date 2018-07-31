@@ -1,24 +1,22 @@
-﻿<Window x:Class="Depths.Interpreter.CharacterCreation"
+﻿<Window x:Class="Depths.CharacterCreation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Depths.Interpreter"
+        xmlns:local="clr-namespace:Depths"
         mc:Ignorable="d"
-        Title="CharacterCreation" Height="298.667" Width="460.667">
+        Title="CharacterCreation" Height="298.667" Width="466.762">
     <Grid>
         <Button x:Name="create_Button" Content="Create" HorizontalAlignment="Left" Margin="368,238,0,0" VerticalAlignment="Top" Width="75" Click="create_Button_Click"/>
         <TextBox x:Name="name_Box" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="47,54,0,0" TextWrapping="Wrap" Text="Gender" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="54,110,0,0" TextWrapping="Wrap" Text="Class" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="321,26,0,0" VerticalAlignment="Top" Width="100" OpacityMask="Black"/>
+        <Image x:Name="portraitImage" HorizontalAlignment="Left" Height="100" Margin="321,26,0,0" VerticalAlignment="Top" Width="100" OpacityMask="Black"/>
         <TextBlock HorizontalAlignment="Left" Margin="54,10,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="354,10,0,0" TextWrapping="Wrap" Text="Portrait" VerticalAlignment="Top"/>
         <Button x:Name="port_Next" Content="->" HorizontalAlignment="Left" Margin="426,61,0,0" VerticalAlignment="Top" Width="27"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="321,26,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="port_Back" Content="&lt;-" HorizontalAlignment="Left" Margin="289,61,0,0" VerticalAlignment="Top" Width="27"/>
-        <ComboBox x:Name="gender_Combo" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="class_Combo" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Width="120"/>
-
+        <ComboBox x:Name="gender_Combo" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="portrait_SelectionChanged"/>
+        <ComboBox x:Name="class_Combo" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="portrait_SelectionChanged"/>
     </Grid>
 </Window>

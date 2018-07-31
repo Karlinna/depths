@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    interface ITalk
+    public interface ITalk
     {
         string Name { get; }
     }

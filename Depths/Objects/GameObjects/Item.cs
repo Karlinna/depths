@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.GameObjects
 {
-    abstract class Item
+    public abstract class Item
     {
         public string Name { get; protected set; }
 

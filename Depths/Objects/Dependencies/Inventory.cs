@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Dependencies
 {
-    class Inventory
+    public class Inventory
     {
         private List<IWearable> Wearables = new List<IWearable>();
 

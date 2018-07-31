@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects
 {
-    interface IAttackable
+    public interface IAttackable
     {
         void GetDamage(int value);
         bool isDead { get; }

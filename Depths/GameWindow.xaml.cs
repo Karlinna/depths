@@ -1,4 +1,5 @@
-﻿using Depths.Objects;
+﻿using Depths.Interpreter;
+using Depths.Objects;
 using Depths.Objects.Player;
 using System;
 using System.Collections.Generic;
@@ -24,38 +25,46 @@ namespace Depths
     public partial class GameWindow : Window
     {
         GameMap gm = new GameMap();
-        Player p = new Player(1,1,false,1,1,1,PlayerClass.MAGE,Gender.FEMALE);
-        DispatcherTimer dt = new DispatcherTimer();
-        public GameWindow()
+        Player p = null;
+        Reader r;
+        Story s = new Story();
+        public GameWindow(Player p)
         {
             InitializeComponent();
+            LoadMap();
+            this.p = p;
+            playerName.Text = this.p.Name;
+            playerImage.Source = new BitmapImage(new Uri(p.image_name,UriKind.RelativeOrAbsolute));
             p.LocX = 1;
             p.LocY = 1;
-            dt.Interval = TimeSpan.FromMilliseconds(100);
-            dt.Tick += Dt_Tick;
             Direction[] d = gm.GetDirections(p.LocX, p.LocY);
-        }
+            MovedPlayer();
+            r = new Reader(this.p);
+            s = r.ReadFromFile("enemyTest.txt");
 
-        private void Dt_Tick(object sender, EventArgs e)
+
+        }
+        private void MovedPlayer()
         {
             dirBox.Text = "";
             Direction[] d = gm.GetDirections(p.LocX, p.LocY);
-            if (d.First(y => y == Direction.UP) != Direction.NONE)
+
+            if (d.FirstOrDefault(y => y == Direction.UP) != Direction.NONE)
             {
                 dirBox.Text += "UP \n";
 
             }
-            if (d.First(y => y == Direction.DOWN) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.DOWN) != Direction.NONE)
             {
                 dirBox.Text += "DOWN \n";
 
             }
-            if (d.First(y => y == Direction.LEFT) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.LEFT) != Direction.NONE)
             {
                 dirBox.Text += "LEFT \n";
 
             }
-            if (d.First(y => y == Direction.RIGHT) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.RIGHT) != Direction.NONE)
             {
                 dirBox.Text += "RIGHT \n";
 
@@ -65,10 +74,11 @@ namespace Depths
         public void LoadMap()
         {
             StreamReader sr = new StreamReader("map.map");
+            int j = 0;
+
             while (!sr.EndOfStream)
             {
-                int j = 0;
-                string[] split = sr.ReadLine().Split(' ');
+                string[] split = sr.ReadLine().Split('\t');
                 for (int i = 0; i < split.Length; i++)
                 {
                     gm[j, i] = int.Parse(split[i]);
@@ -85,31 +95,36 @@ namespace Depths
 
            Direction[] d =  gm.GetDirections(p.LocX, p.LocY);
 
-            if(d.First(y => y == Direction.UP) != Direction.NONE)
+            if(d.FirstOrDefault(y => y == Direction.UP) != Direction.NONE)
             {
-                dirBox.Text += "UP \n";
                 if(dir == "Up")
                 {
-                    p.LocY -= 1;
+                    p.LocX -= 1;
                 }
             }
-            if (d.First(y => y == Direction.DOWN) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.DOWN) != Direction.NONE)
             {
-                dirBox.Text += "DOWN \n";
-                if (dir == "Down") p.LocY += 1;
+                if (dir == "Down") p.LocX += 1;
             }
-            if (d.First(y => y == Direction.LEFT) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.LEFT) != Direction.NONE)
             {
-                dirBox.Text += "LEFT \n";
                 if (dir == "Left") p.LocY -= 1;
             }
-            if (d.First(y => y == Direction.RIGHT) != Direction.NONE)
+            if (d.FirstOrDefault(y => y == Direction.RIGHT) != Direction.NONE)
             {
-                dirBox.Text += "RIGHT \n";
                 if (dir == "Right") p.LocY += 1;
             }
+            MovedPlayer();
 
-            
+        }
+
+        private void actButtonClick(object sender, RoutedEventArgs e)
+        {
+            WriteText(s.GetNextStoryBoard());
+        }
+        public void WriteText(string s)
+        {
+            storyBox.Text += s + "\n";
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Interfaces
 {
-    interface IHealable
+    public interface IHealable
     {
         void GetHeal(int value, IHealer got);
     }

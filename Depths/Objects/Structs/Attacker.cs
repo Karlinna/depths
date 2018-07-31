@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Structs
 {
-    abstract class Attacker : IAttackable, IAttacker
+    public abstract class Attacker : IAttackable, IAttacker
     {
         public int Health { protected set; get; }
         public int Mana { protected set; get; }

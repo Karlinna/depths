@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    class Player : Healer, ITalk, IWearer
+    public class Player : Healer, ITalk, IWearer
     {
         public int LocX;
         public int LocY;
@@ -19,17 +19,20 @@ namespace Depths.Objects.Player
         public Backpack Backpack = new Backpack(20);
         public Inventory EquippedItems { get; }
 
-        public PlayerClass playerClass { get; }
+        public PlayerClass PlayerClass { get; private set; }
         public Gender Gender { get; }
 
         public string FormalGreeting = "";
         public string NotFormalGreet = "";
 
-        public Player(int health, int mana, bool isD, int healthMax, int baseDamage, double coeff, PlayerClass pc, Gender g)
+        public string image_name;
+
+        public Player(string name, int health, int mana, bool isD, int healthMax, int baseDamage, double coeff, PlayerClass pc, Gender g)
           : base(health, mana, isD, healthMax, baseDamage, coeff)
         {
-            playerClass = pc;
+            PlayerClass = pc;
             Gender = g;
+            Name = name;
         }
 
         public void PickUp(Item a)
@@ -65,11 +68,10 @@ namespace Depths.Objects.Player
 
             }
         }
-
         public override string ToString()
         {
             return String.Format("{0} {1} {2} {3} {4} {5}", 
-                Name, FormalGreeting, Health, BaseDamage, Enum.GetName(typeof(Gender), Gender), Enum.GetName(typeof(PlayerClass) , playerClass));
+                Name, FormalGreeting, Health, BaseDamage, Enum.GetName(typeof(Gender), Gender), Enum.GetName(typeof(PlayerClass) , PlayerClass));
         }
     }
 }

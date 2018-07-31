@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Structs
 {
-    static class ItemStructure
+    public static class ItemStructure
     {
         private static List<Item> Items = new List<Item>();    
         private static List<Weapon> Weapons = new List<Weapon>();

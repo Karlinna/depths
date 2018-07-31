@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    static class Slots
+    public static class Slots
     {
         public static int Helm { get { return 0; } }
         public static  int Necklace { get { return 1; } }
