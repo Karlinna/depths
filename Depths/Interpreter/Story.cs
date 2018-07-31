@@ -1,4 +1,5 @@
 ﻿using Depths.Objects;
+using Depths.Objects.Mapper;
 using Depths.Objects.Player;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,12 @@ namespace Depths.Interpreter
         private Dialogue<ITalk, string> Storyboard = new Dialogue<ITalk, string>();
         private List<Enemy> enemies = new List<Enemy>();
         private List<NPC> npcs = new List<NPC>();
+        private List<MapCondition> Conditions = new List<MapCondition>();
         private int state = 0;
+        public MapCondition OpenedMap;
         public ITalk p;
+        public bool Engaged { get; set; }
+        public bool FirstEngaged { get; private set; }
         public void AddStoryBoard(ITalk i, string s)
         {
             Storyboard.Add(i, s);
@@ -46,12 +51,31 @@ namespace Depths.Interpreter
             return enemies.Find(n => n.Name == name);
 
         }
+        public void AddMapCondition(MapCondition mc)
+        {
+            Conditions.Add(mc);
+        }
         public string GetNextStoryBoard()
         {
-            if (state > Storyboard.Count) return "";
             string s = "";
-            s = string.Format("{0} - '{1}'", Storyboard.GetKey(state).Name, Storyboard.GetValue(state));
-            state++;
+            if(OpenedMap != null)
+            {               
+                if(OpenedMap.EndIndex >= state)
+                {
+                    FirstEngaged = false;
+                    return String.Format("{0} - {1}", Storyboard.GetKey(state).Name,
+                   Storyboard.GetValue(state));
+                }
+                else
+                {
+
+                    int index = Conditions.FindIndex(y => y == OpenedMap);
+                    OpenedMap = null;
+                    state = 0;
+                    Conditions[index].Exists = false;
+                    Engaged = false;
+                }
+            }            
             return s;
         }
 
@@ -74,8 +98,31 @@ namespace Depths.Interpreter
                         "%[class]*%", Enum.GetName(typeof(PlayerClass), player.PlayerClass).ToLower());
                     Storyboard.SetValue(i, s);
                 }
+            }            
+        }
+
+        public int Count => Storyboard.Count;
+
+        public void AutoEngage()
+        {
+            Engaged = false;
+         
+            if (OpenedMap != null) return;
+            foreach (MapCondition item in Conditions)
+            {
+                Player player = (Player)p;
+                if (item.ConditionMet(player.LocX, player.LocY) && item.Exists)
+                {
+                    state = item.StartIndex;
+                    OpenedMap = item;
+                    Engaged = true;
+                    FirstEngaged = true;
+                }
             }
-            
+        }
+        public void StateChange()
+        {
+            state++;
         }
     }
 }

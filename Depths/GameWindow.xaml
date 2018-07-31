@@ -20,6 +20,7 @@
         <Image x:Name="playerImage" HorizontalAlignment="Left" Height="100" Margin="10,37,0,0" VerticalAlignment="Top" Width="100"/>
 
         <Image HorizontalAlignment="Left" Height="100" Margin="230,37,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock x:Name="playerName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-2.559,-0.509" Width="100" Height="27" FontFamily="Rockwell" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="playerName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-2.559,-0.509" Width="77" Height="27" FontFamily="Rockwell" FontWeight="Bold" FontSize="14"/>
+        <TextBlock x:Name="coords" HorizontalAlignment="Left" Margin="110,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-2.559,-0.509" Width="40" Height="27" FontFamily="Rockwell" FontWeight="Bold" FontSize="14"/>
     </Grid>
 </Window>

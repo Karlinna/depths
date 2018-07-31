@@ -1,4 +1,5 @@
 ﻿using Depths.Objects;
+using Depths.Objects.Mapper;
 using Depths.Objects.Player;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Depths.Interpreter
         {
             Story s = new Story();
             StreamReader sr = new StreamReader(file);
+            s.p = p;
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
@@ -48,8 +50,7 @@ namespace Depths.Interpreter
 
                     if(story[0] == "player")
                     {
-                        s.AddStoryBoard(p, story[1]);
-                        if (s.p == null) s.p = p;
+                        s.AddStoryBoard(p, story[1]);           
                     }
 
                     if (type.Length < 2)
@@ -75,6 +76,53 @@ namespace Depths.Interpreter
                     }
                 }
 
+                else if (IsMapCondition(line))
+                {
+                    string[] data = GetConditonData(line);
+                    string[] charac = data[0].Split(':');
+                    Enemy e = s.GetEnemyByName(charac[1]);
+                    Enemy x = null;
+                    if(e.LocX != 0)
+                    {
+                        x = (Enemy)e.Clone();
+                        x.LocX = int.Parse(data[1]);
+                        x.LocY = int.Parse(data[2]);
+                    }
+                    else
+                    {
+                        e.LocX = int.Parse(data[1]);
+                        e.LocY = int.Parse(data[2]);
+                    }
+
+                    int startIndex = s.Count;
+                    bool bracket = true;
+                    int count = 0;
+                    while (bracket)
+                    {
+                        string read = sr.ReadLine();
+                        if (read == "map_cond_end") bracket = false;
+                        else
+                        {
+                            string[] story = read.Split('-');
+                            if (story[0] == "player")
+                            {
+                                s.AddStoryBoard(p, story[1]);
+                                count++;
+                            }
+                            else
+                            {
+                                s.AddStoryBoard(e, story[1]);
+                                count++;
+                            }
+                           
+                        }
+                    }
+
+                    MapCondition mc = new MapCondition(x != null ? x : e, startIndex, startIndex + count -1);
+                    s.AddMapCondition(mc);
+                }
+
+
             }
             sr.Close();
             s.FormatText();
@@ -94,8 +142,9 @@ namespace Depths.Interpreter
             return split.Length < 2 ? true : false;
         }
         private bool IsStoryboard(string line)
-        {
+        {            
             string[] story = line.Split('-');
+            if (story.Length < 2) return false;
             string speak = story[1];
             return speak.Contains("\"");
         }
@@ -113,6 +162,21 @@ namespace Depths.Interpreter
             cuttedline = cuttedline.Trim();
             string[] data = cuttedline.Split(',');
 
+            return data;
+        }
+        private bool IsMapCondition(string line)
+        {
+            if (!line.Contains("map_cond")) return false;
+
+            return true;
+        }
+        private string[] GetConditonData(string line)
+        {
+            string cuttedline = line.Replace("map_cond", "");
+            cuttedline = cuttedline.Replace("(", "");
+            cuttedline = cuttedline.Replace(")", "");
+            cuttedline = cuttedline.Trim();
+            string[] data = cuttedline.Split(',');
             return data;
         }
         #endregion

@@ -46,9 +46,16 @@ namespace Depths
         }
         private void MovedPlayer()
         {
-            dirBox.Text = "";
-            Direction[] d = gm.GetDirections(p.LocX, p.LocY);
+            s.AutoEngage();
+            if (s.FirstEngaged && s.Engaged)
+            {
+                WriteText(s.GetNextStoryBoard());
+                s.StateChange();
 
+            }
+            dirBox.Text = "";
+            coords.Text = String.Format("{0}-{1}", p.LocX, p.LocY);
+            Direction[] d = gm.GetDirections(p.LocX, p.LocY);
             if (d.FirstOrDefault(y => y == Direction.UP) != Direction.NONE)
             {
                 dirBox.Text += "UP \n";
@@ -67,8 +74,8 @@ namespace Depths
             if (d.FirstOrDefault(y => y == Direction.RIGHT) != Direction.NONE)
             {
                 dirBox.Text += "RIGHT \n";
-
             }
+            
         }
 
         public void LoadMap()
@@ -90,10 +97,12 @@ namespace Depths
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (s.Engaged == true) return;
+            
             Button b = (Button)sender;
             string dir = (string)b.Content;
 
-           Direction[] d =  gm.GetDirections(p.LocX, p.LocY);
+            Direction[] d =  gm.GetDirections(p.LocX, p.LocY);
 
             if(d.FirstOrDefault(y => y == Direction.UP) != Direction.NONE)
             {
@@ -120,10 +129,12 @@ namespace Depths
 
         private void actButtonClick(object sender, RoutedEventArgs e)
         {
-            WriteText(s.GetNextStoryBoard());
+            if (s.OpenedMap != null) WriteText(s.GetNextStoryBoard());
+            s.StateChange();
         }
         public void WriteText(string s)
         {
+            if (s.Trim() == "") return;
             storyBox.Text += s + "\n";
         }
     }

@@ -1,10 +1,20 @@
 enemy(Test,100,100,false,100,10,10)
 character(Jozsef, M)
 
-enemy:Test-"Hello There General Kenobi"
-Jozsef-"Test it now"
-character:Jozsef-"test this too"
-Test-"hahahaha"
-player-"Well, met..."
-Jozsef-"Hey, %player%. How you doin?"
-Jozsef-"You look like a %class%."
+map_cond(enemy:Test, 3, 1)
+Test-"You are at 3, 1, %class%."
+Test-"This is where you engage a battle, %player%."
+player-"You wanted this, Test."
+map_cond_end
+
+map_cond(enemy:Test, 6,1)
+Test-"Second time, %player%."
+Test-"Next time, you have luck."
+player-"Let's find out, bruv."
+player-"I'm a %class%, bitch."
+map_cond_end
+
+map_cond(enemy:Test, 9,1)
+player-"What a bother"
+Test-"I WILL WIN, %player%!!"
+map_cond_end
