@@ -19,5 +19,11 @@ namespace Depths.Objects.Player
                Value +=  e.GetAttributeValue(e[i], Type);
             }
         }
+
+        public Attribute(AttributeType type, int value)
+        {
+            Type = type;
+            Value = value;
+        }
     }
 }

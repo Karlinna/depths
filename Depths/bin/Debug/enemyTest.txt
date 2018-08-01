@@ -1,10 +1,11 @@
-enemy(Test,100,100,false,100,10,10)
+enemy(Test,50,100,false,100,10,1)
 character(Jozsef, M)
 
 map_cond(enemy:Test, 3, 1)
 Test-"You are at 3, 1, %class%."
 Test-"This is where you engage a battle, %player%."
-player-"You wanted this, Test."
+player-"You wanted this, %target%."
+engage_battle()
 map_cond_end
 
 map_cond(enemy:Test, 6,1)
@@ -17,4 +18,9 @@ map_cond_end
 map_cond(enemy:Test, 9,1)
 player-"What a bother"
 Test-"I WILL WIN, %player%!!"
+map_cond_end
+
+map_cond(character:Jozsef, 9, 3)
+player-"Hello, %target%. How you doin?"
+target-"Hello, %player%. I'm testing map conditions"
 map_cond_end

@@ -1,0 +1,32 @@
+            //else if (IsStoryboard(line))
+                //{
+                //    string[] story = line.Split('-');
+                //    string[] type = story[0].Split(':');
+
+                //    if(story[0] == "player")
+                //    {
+                //        s.AddStoryBoard(s.p, story[1]);           
+                //    }
+
+                //    if (type.Length < 2)
+                //    {
+                //        if (story[0] == "player") continue;
+                //        if (s.GetNpcByName(story[0]) != null &&
+                //            s.GetEnemyByName(story[0]) != null)
+                //            throw new AmbigiousCharacterDefinedException(story[0]);
+                //        NPC c = s.GetNpcByName(story[0]);
+                //        Enemy e = null;
+                //        if (c == null) { e = s.GetEnemyByName(story[0]); s.AddStoryBoard(e, story[1]); }
+                //        else s.AddStoryBoard(c, story[1]);
+                //    }     
+                //    if(type[0] == "enemy")
+                //    {
+                //        Enemy e = s.GetEnemyByName(type[1]);
+                //        s.AddStoryBoard(e, story[1]);
+                //    }
+                //    if(type[0] == "character")
+                //    {
+                //        NPC e = s.GetNpcByName(type[1]);
+                //        s.AddStoryBoard(e, story[1]);
+                //    }
+                //}

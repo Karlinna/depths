@@ -100,6 +100,8 @@
     <Compile Include="Objects\GameObjects\ItemRarity.cs" />
     <Compile Include="Objects\GameObjects\Scripts\WeaponScripts.cs" />
     <Compile Include="Objects\GameObjects\Weapon.cs" />
+    <Compile Include="Objects\Gameplay\Battle.cs" />
+    <Compile Include="Objects\Gameplay\BattleLogger.cs" />
     <Compile Include="Objects\Interfaces\IMapCond.cs" />
     <Compile Include="Objects\Interfaces\IWearable.cs" />
     <Compile Include="Objects\Interfaces\IWearer.cs" />
@@ -112,7 +114,7 @@
     <Compile Include="Objects\Interfaces\IHealer.cs" />
     <Compile Include="Objects\Interfaces\ITalk.cs" />
     <Compile Include="Objects\GameObjects\Item.cs" />
-    <Compile Include="Objects\Entities\NPC.cs" />
+    <Compile Include="Objects\Entities\Character.cs" />
     <Compile Include="Objects\Mapper\MapCondition.cs" />
     <Compile Include="Objects\Player\Attribute.cs" />
     <Compile Include="Objects\Player\AttributeType.cs" />

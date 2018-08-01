@@ -1,4 +1,5 @@
 ﻿using Depths.Objects;
+using Depths.Objects.Gameplay;
 using Depths.Objects.Mapper;
 using Depths.Objects.Player;
 using System;
@@ -14,7 +15,7 @@ namespace Depths.Interpreter
     {
         private Dialogue<ITalk, string> Storyboard = new Dialogue<ITalk, string>();
         private List<Enemy> enemies = new List<Enemy>();
-        private List<NPC> npcs = new List<NPC>();
+        private List<Character> npcs = new List<Character>();
         private List<MapCondition> Conditions = new List<MapCondition>();
         private int state = 0;
         public MapCondition OpenedMap;
@@ -31,7 +32,7 @@ namespace Depths.Interpreter
                 enemies.Add(enemy);
             //else: double defined ? exception
         }
-        public void AddNPC(NPC n)
+        public void AddNPC(Character n)
         {
             if(!npcs.Exists(y => y.Name == n.Name))
                 npcs.Add(n);
@@ -42,7 +43,7 @@ namespace Depths.Interpreter
         {
             return enemies[i];
         }
-        public NPC GetNpcByName(string name)
+        public Character GetNpcByName(string name)
         {
             return npcs.Find(n => n.Name == name);
         }
@@ -58,34 +59,37 @@ namespace Depths.Interpreter
         public string GetNextStoryBoard()
         {
             string s = "";
-            if(OpenedMap != null)
-            {               
-                if(OpenedMap.EndIndex >= state)
-                {
+           
+            if (OpenedMap != null) { 
+                
+                    if (OpenedMap.EndIndex >= state)
+                    {
+                    if (state > Count - 1) return s;
                     FirstEngaged = false;
-                    return String.Format("{0} - {1}", Storyboard.GetKey(state).Name,
-                   Storyboard.GetValue(state));
-                }
-                else
-                {
+                        return String.Format("{0} - {1}", Storyboard.GetKey(state).Name,
+                       Storyboard.GetValue(state));
+                    }
+                    else
+                    {
 
-                    int index = Conditions.FindIndex(y => y == OpenedMap);
-                    OpenedMap = null;
-                    state = 0;
-                    Conditions[index].Exists = false;
-                    Engaged = false;
+                        int index = Conditions.FindIndex(y => y == OpenedMap);
+                        OpenedMap = null;
+                        state = 0;
+                        Conditions[index].Exists = false;
+                        Engaged = false;
+                    }
                 }
-            }            
+     
             return s;
         }
 
         public void FormatText()
         {
-            Regex r = new Regex("%[player]*%");
+            Regex pl = new Regex("%[player]*%");
             Regex c = new Regex("%[class]*%");
             for (int i = 0; i < Storyboard.Count; i++)
             {
-                if (r.IsMatch(Storyboard.GetValue(i)))
+                if (pl.IsMatch(Storyboard.GetValue(i)))
                 {
                    string s = Regex.Replace(Storyboard.GetValue(i),
                        "%[player]*%", p.Name);
@@ -98,6 +102,7 @@ namespace Depths.Interpreter
                         "%[class]*%", Enum.GetName(typeof(PlayerClass), player.PlayerClass).ToLower());
                     Storyboard.SetValue(i, s);
                 }
+         
             }            
         }
 
@@ -123,6 +128,18 @@ namespace Depths.Interpreter
         public void StateChange()
         {
             state++;
+        }
+
+        public Battle GetBattle()
+        {
+            if(state > Count - 1) return null;
+            return (Battle)Storyboard.GetKey(state);
+        }
+        public bool IsBattle()
+        {
+            if (state > Count - 1) return false;
+            return Storyboard.GetKey(state) is Battle;
+
         }
     }
 }

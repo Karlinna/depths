@@ -1,8 +1,10 @@
 ﻿using Depths.Interpreter;
 using Depths.Objects;
+using Depths.Objects.Gameplay;
 using Depths.Objects.Player;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,13 +26,18 @@ namespace Depths
     /// </summary>
     public partial class GameWindow : Window
     {
+        public static GameWindow GetGameWindow;
         GameMap gm = new GameMap();
         Player p = null;
         Reader r;
         Story s = new Story();
+        Battle b = null;
+
+
         public GameWindow(Player p)
         {
             InitializeComponent();
+            GetGameWindow = this;
             LoadMap();
             this.p = p;
             playerName.Text = this.p.Name;
@@ -40,10 +47,10 @@ namespace Depths
             Direction[] d = gm.GetDirections(p.LocX, p.LocY);
             MovedPlayer();
             r = new Reader(this.p);
-            s = r.ReadFromFile("enemyTest.txt");
-
-
+            s = r.ReadFromFile("enemyTest.txt");          
+            
         }
+
         private void MovedPlayer()
         {
             s.AutoEngage();
@@ -129,13 +136,52 @@ namespace Depths
 
         private void actButtonClick(object sender, RoutedEventArgs e)
         {
-            if (s.OpenedMap != null) WriteText(s.GetNextStoryBoard());
-            s.StateChange();
+            if (b != null && p.InCombat) return;
+            if (s.OpenedMap != null)
+            {
+                if(s.IsBattle())
+                {
+                    if (b == null)
+                    {
+                        b = s.GetBattle();
+                        WriteText("Battle Starts!!");
+                    }
+
+                
+                }
+                else
+                {
+                    WriteText(s.GetNextStoryBoard());
+                    s.StateChange();
+                }
+            }
+   
         }
         public void WriteText(string s)
         {
             if (s.Trim() == "") return;
             storyBox.Text += s + "\n";
         }
+
+        private void Attack_Click(object sender, RoutedEventArgs e)
+        {
+            if(b != null)
+            {
+                b.PlayerAttacks();
+                if (b.BattleOver)
+                {
+                    b = null;
+                    p.InCombat = false;
+                    WriteText("Battle is Over!!");
+                    s.StateChange();
+                    WriteText(s.GetNextStoryBoard());
+                }
+            }
+        }
+        public void ChangeValue(int value)
+        {
+            HealthBar.Value = value;
+        }
+ 
     }
 }

@@ -16,15 +16,15 @@ namespace Depths.Objects.Structs
         }
 
 
-        public void GetHeal(int value, IHealer got)
+        public virtual void GetHeal(int value, IHealer got)
         {
             if (Health + value > HealthMax) Health = HealthMax;
             else Health += value;
         }
 
-        public void HealOther(IHealable healable, int value)
+        public virtual void HealOther(IHealable healable)
         {
-            healable.GetHeal(value, this);
+            healable.GetHeal(10, this);
         }
     }
 }

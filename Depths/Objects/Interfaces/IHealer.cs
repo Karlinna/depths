@@ -8,6 +8,6 @@ namespace Depths.Objects.Interfaces
 {
     public interface IHealer
     {
-        void HealOther(IHealable healable, int value);
+        void HealOther(IHealable healable);
     }
 }

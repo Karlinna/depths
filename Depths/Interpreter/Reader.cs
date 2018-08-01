@@ -1,11 +1,14 @@
 ﻿using Depths.Objects;
+using Depths.Objects.Gameplay;
 using Depths.Objects.Mapper;
 using Depths.Objects.Player;
+using Depths.Objects.Structs;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Depths.Interpreter
@@ -33,67 +36,61 @@ namespace Depths.Interpreter
                     string[] data = GetDataFromRow(line, "enemy");
                     Enemy e = new Enemy(data[0], int.Parse(data[1]),
                         int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4]),
-                        int.Parse(data[5]), double.Parse(data[5]));
+                        int.Parse(data[5]), double.Parse(data[6]));
                     s.AddEnemy(e);
                 }
                 else if (IsCharacter(line))
                 {
                     string[] data = GetDataFromRow(line, "character");
-                    NPC n = new NPC(data[0],
+                    Character n = new Character(data[0],
                         data[1] == "M" ? Gender.MALE : data[1] == "F" ? Gender.FEMALE : Gender.OTHER);
                     s.AddNPC(n);
-                }
-                else if (IsStoryboard(line))
+                }    
+                else if (line.Split('-')[0] == "target")
                 {
-                    string[] story = line.Split('-');
-                    string[] type = story[0].Split(':');
-
-                    if(story[0] == "player")
-                    {
-                        s.AddStoryBoard(p, story[1]);           
-                    }
-
-                    if (type.Length < 2)
-                    {
-                        if (story[0] == "player") continue;
-                        if (s.GetNpcByName(story[0]) != null &&
-                            s.GetEnemyByName(story[0]) != null)
-                            throw new AmbigiousCharacterDefinedException(story[0]);
-                        NPC c = s.GetNpcByName(story[0]);
-                        Enemy e = null;
-                        if (c == null) { e = s.GetEnemyByName(story[0]); s.AddStoryBoard(e, story[1]); }
-                        else s.AddStoryBoard(c, story[1]);
-                    }     
-                    if(type[0] == "enemy")
-                    {
-                        Enemy e = s.GetEnemyByName(type[1]);
-                        s.AddStoryBoard(e, story[1]);
-                    }
-                    if(type[0] == "character")
-                    {
-                        NPC e = s.GetNpcByName(type[1]);
-                        s.AddStoryBoard(e, story[1]);
-                    }
+                    throw new Exception("Target was called but no mapcondition");
                 }
-
                 else if (IsMapCondition(line))
                 {
                     string[] data = GetConditonData(line);
                     string[] charac = data[0].Split(':');
-                    Enemy e = s.GetEnemyByName(charac[1]);
+                    Enemy e = null;
                     Enemy x = null;
-                    if(e.LocX != 0)
+                    Character n = null;
+                    Character p = null;
+                    int lever = -1;
+                    if (charac[0] == "enemy")
                     {
-                        x = (Enemy)e.Clone();
-                        x.LocX = int.Parse(data[1]);
-                        x.LocY = int.Parse(data[2]);
+                        lever = 0;
+                        e = s.GetEnemyByName(charac[1]);
+                        if (e.LocX != 0)
+                        {
+                            x = (Enemy)e.Clone();
+                            x.LocX = int.Parse(data[1]);
+                            x.LocY = int.Parse(data[2]);
+                        }
+                        else
+                        {
+                            e.LocX = int.Parse(data[1]);
+                            e.LocY = int.Parse(data[2]);
+                        }
                     }
-                    else
+                    else if(charac[0] == "character")
                     {
-                        e.LocX = int.Parse(data[1]);
-                        e.LocY = int.Parse(data[2]);
+                        lever = 1;
+                        n = s.GetNpcByName(charac[1]);
+                        if (n.LocX != 0)
+                        {
+                            p = (Character)n.Clone();
+                            p.LocX = int.Parse(data[1]);
+                            p.LocY = int.Parse(data[2]);
+                        }
+                        else
+                        {
+                            n.LocX = int.Parse(data[1]);
+                            n.LocY = int.Parse(data[2]);
+                        }
                     }
-
                     int startIndex = s.Count;
                     bool bracket = true;
                     int count = 0;
@@ -101,28 +98,64 @@ namespace Depths.Interpreter
                     {
                         string read = sr.ReadLine();
                         if (read == "map_cond_end") bracket = false;
-                        else
+                        else if (read == "engage_battle()")
                         {
+                            Battle b = new Battle((Player)s.p, x ?? e);
+                            s.AddStoryBoard(b, "Battle");
+                        }
+                        else
+                        {                      
                             string[] story = read.Split('-');
                             if (story[0] == "player")
-                            {
-                                s.AddStoryBoard(p, story[1]);
+                            {                               
+
+                                Regex t = new Regex("%[target]*%");
+                                if (t.IsMatch(story[1]))
+                                {
+                                   switch(lever)
+                                    {
+                                        case 0:
+                                            ITalk target = x ?? e;
+                                           story[1] =  Regex.Replace(story[1], "%[target]*%", target.Name);
+                                            break;
+                                        case 1:
+                                            ITalk target2 = p ?? n;
+                                            story[1] = Regex.Replace(story[1], "%[target]*%", target2.Name);
+                                            break;
+                                    }
+                                }
+
+                                s.AddStoryBoard(s.p, story[1]);
                                 count++;
                             }
+                            else if(story[0] == "target")
+                            {
+                                s.AddStoryBoard(p ?? n, story[1]);
+                                count++;
+                            }                  
                             else
                             {
-                                s.AddStoryBoard(e, story[1]);
+                                s.AddStoryBoard(x ?? e, story[1]);
                                 count++;
                             }
                            
                         }
                     }
-
-                    MapCondition mc = new MapCondition(x != null ? x : e, startIndex, startIndex + count -1);
-                    s.AddMapCondition(mc);
+                    MapCondition mc = null;
+                    switch (lever)
+                    {
+                        case 0:
+                            mc = new MapCondition(x ?? e, startIndex, startIndex + count - 1);
+                            s.AddMapCondition(mc);
+                            break;
+                        case 1:
+                            mc = new MapCondition(p ?? n, startIndex, startIndex + count - 1);
+                            s.AddMapCondition(mc);
+                            break;
+                    }
+                    
+                    
                 }
-
-
             }
             sr.Close();
             s.FormatText();

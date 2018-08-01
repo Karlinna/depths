@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Depths"
         mc:Ignorable="d"
-        Title="GameWindow" Height="646" Width="672">
+        Title="GameWindow" Height="696.42" Width="672">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Button Content="Up" HorizontalAlignment="Left" Margin="250,515,0,0" VerticalAlignment="Top" Width="138" Height="43" Click="Button_Click"/>
         <Button Content="Down" HorizontalAlignment="Left" Margin="250,563,0,0" VerticalAlignment="Top" Width="138" Height="43" Click="Button_Click"/>
         <Button Content="Right" HorizontalAlignment="Left" Margin="407,563,0,0" VerticalAlignment="Top" Width="138" Height="43" Click="Button_Click"/>
         <Button Content="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="92,563,0,0" Click="Button_Click"/>
-        <Button Content="Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="92,515,0,0"/>
+        <Button x:Name="Attack" Content="Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="92,515,0,0" Click="Attack_Click"/>
         <Button Content="Strong Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="407,515,0,0"/>
         <Button Content="Inv" HorizontalAlignment="Left" Margin="550,515,0,0" VerticalAlignment="Top" Width="40" Height="43"/>
         <Button Content="Act" HorizontalAlignment="Left" Margin="47,515,0,0" VerticalAlignment="Top" Width="40" Height="43" Click="actButtonClick"/>
@@ -22,5 +25,7 @@
         <Image HorizontalAlignment="Left" Height="100" Margin="230,37,0,0" VerticalAlignment="Top" Width="100"/>
         <TextBlock x:Name="playerName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-2.559,-0.509" Width="77" Height="27" FontFamily="Rockwell" FontWeight="Bold" FontSize="14"/>
         <TextBlock x:Name="coords" HorizontalAlignment="Left" Margin="110,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="-2.559,-0.509" Width="40" Height="27" FontFamily="Rockwell" FontWeight="Bold" FontSize="14"/>
+        <ProgressBar Value="100" x:Name="HealthBar" HorizontalAlignment="Left" Height="21" Margin="10,635,0,0" VerticalAlignment="Top" Width="188" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <ProgressBar Value="100" x:Name="ManaBar" HorizontalAlignment="Left" Height="21" Margin="466,635,0,0" VerticalAlignment="Top" Width="188" Foreground="#FF0038B0"/>
     </Grid>
 </Window>

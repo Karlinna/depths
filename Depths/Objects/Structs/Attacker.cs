@@ -20,6 +20,7 @@ namespace Depths.Objects.Structs
             }
 
         }
+        public int LastDamageDone { get; protected set; }
 
         protected Attacker(int health, int mana, bool isD, int healthMax, int baseDamage, double coeff)
         {
@@ -35,14 +36,14 @@ namespace Depths.Objects.Structs
 
         public double Coeff { protected set; get; }
 
-        public void GetDamage(int value)
+        public virtual void GetDamage(int value)
         {
             if (Health - value <= 0) isD = true;
             else Health -= value;
 
         }
 
-        public void HealThis(int value)
+        public virtual void HealThis(int value)
         {
             if (value + Health > HealthMax)
             {
@@ -54,9 +55,10 @@ namespace Depths.Objects.Structs
             }
         }
 
-        public void DamageOther(IAttackable target)
+        public virtual void DamageOther(IAttackable target)
         {
-            target.GetDamage((int)((double)BaseDamage * Coeff));
+            LastDamageDone = (int)((double)BaseDamage * Coeff);
+            target.GetDamage(LastDamageDone);
         }
 
     }
