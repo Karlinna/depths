@@ -30,3 +30,9 @@
                 //        s.AddStoryBoard(e, story[1]);
                 //    }
                 //}
+
+mivel shallow speak is mapcondition
+             else if (line.Split('-')[0] == "target")
+                {
+                    throw new Exception("Target was called but no mapcondition");
+                }

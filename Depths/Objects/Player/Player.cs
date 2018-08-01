@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace Depths.Objects.Player
 {
-    public class Player : Healer, ITalk, IWearer
+    public class Player : Healer, ITalk, IWearer, IMapCond
     {
-        public int LocX;
-        public int LocY;
+
         public string Name { get; private set; }
         public Backpack Backpack = new Backpack(20);
         public Inventory EquippedItems { get; }
@@ -38,7 +37,8 @@ namespace Depths.Objects.Player
 
         public string BaseAttackName { get; }
         public string BaseStrongAttackname { get; }
-
+        public int LocY { get; set; }
+        public int LocX { get; set; }
 
         public Player(string name, int health, int mana, bool isD, int healthMax, int baseDamage, double coeff, PlayerClass pc, Gender g)
           : base(health, mana, isD, healthMax, baseDamage, coeff)

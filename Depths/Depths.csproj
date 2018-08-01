@@ -97,6 +97,7 @@
     <Compile Include="Objects\Dependencies\Dialogue.cs" />
     <Compile Include="Objects\Dependencies\Inventory.cs" />
     <Compile Include="Objects\Dependencies\Stats.cs" />
+    <Compile Include="Objects\Entities\Narrator.cs" />
     <Compile Include="Objects\GameObjects\ItemRarity.cs" />
     <Compile Include="Objects\GameObjects\Scripts\WeaponScripts.cs" />
     <Compile Include="Objects\GameObjects\Weapon.cs" />

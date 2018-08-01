@@ -5,22 +5,15 @@ map_cond(enemy:Test, 3, 1)
 Test-"You are at 3, 1, %class%."
 Test-"This is where you engage a battle, %player%."
 player-"You wanted this, %target%."
-engage_battle()
 map_cond_end
 
-map_cond(enemy:Test, 6,1)
-Test-"Second time, %player%."
-Test-"Next time, you have luck."
-player-"Let's find out, bruv."
-player-"I'm a %class%, bitch."
+map_cond(9,5)
+player-"This is a shallow speak at 9,5"
+narr-"This is narration at 9,5"
 map_cond_end
 
-map_cond(enemy:Test, 9,1)
-player-"What a bother"
-Test-"I WILL WIN, %player%!!"
-map_cond_end
-
-map_cond(character:Jozsef, 9, 3)
-player-"Hello, %target%. How you doin?"
-target-"Hello, %player%. I'm testing map conditions"
+map_cond(9,6)
+player-"Shallow speak with only player speech."
+player-"Should it cause error if no narrator?"
+player-"Probably not."
 map_cond_end

@@ -1,4 +1,5 @@
 ﻿using Depths.Objects;
+using Depths.Objects.Entities;
 using Depths.Objects.Gameplay;
 using Depths.Objects.Mapper;
 using Depths.Objects.Player;
@@ -20,6 +21,7 @@ namespace Depths.Interpreter
         private int state = 0;
         public MapCondition OpenedMap;
         public ITalk p;
+        public Narrator narrator = new Narrator();
         public bool Engaged { get; set; }
         public bool FirstEngaged { get; private set; }
         public void AddStoryBoard(ITalk i, string s)
