@@ -18,5 +18,20 @@ namespace Depths.Objects.Entities
         {
             return MemberwiseClone();
         }
+
+        public string Save()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[NARRATOR]");
+            sb.AppendLine();
+            sb.Append(String.Format("name:{0}", Name));
+            sb.AppendLine();
+            sb.Append(String.Format("LocX:{0}", LocX));
+            sb.AppendLine();
+            sb.Append(String.Format("LocY:{0}", LocY));
+            sb.AppendLine();
+            sb.Append("[NARRATOR]");
+            return sb.ToString();
+        }
     }
 }

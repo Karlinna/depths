@@ -31,5 +31,5 @@ namespace Depths.Objects
             ListOfValues[i] = value;
         }
         public int Count => ListOfKey.Count;
-    }
+       }
 }

@@ -89,6 +89,8 @@ namespace Depths.Interpreter
         {
             Regex pl = new Regex("%[player]*%");
             Regex c = new Regex("%[class]*%");
+            Regex f = new Regex("%[formal]*%");
+            Regex cas = new Regex("%[casual]*%");
             for (int i = 0; i < Storyboard.Count; i++)
             {
                 if (pl.IsMatch(Storyboard.GetValue(i)))
@@ -97,14 +99,28 @@ namespace Depths.Interpreter
                        "%[player]*%", p.Name);
                     Storyboard.SetValue(i, s);
                 }
-                else if (c.IsMatch(Storyboard.GetValue(i)))
+                if (c.IsMatch(Storyboard.GetValue(i)))
                 {
                     Player player = (Player)p;
                     string s = Regex.Replace(Storyboard.GetValue(i),
                         "%[class]*%", Enum.GetName(typeof(PlayerClass), player.PlayerClass).ToLower());
                     Storyboard.SetValue(i, s);
                 }
-         
+                if (f.IsMatch(Storyboard.GetValue(i)))
+                {
+                    Player player = (Player)p;
+                    string s = Regex.Replace(Storyboard.GetValue(i),
+                        "%[formal]*%", player.FormalGreeting);
+                    Storyboard.SetValue(i, s);
+                }
+                if (cas.IsMatch(Storyboard.GetValue(i)))
+                {
+                    Player player = (Player)p;
+                    string s = Regex.Replace(Storyboard.GetValue(i),
+                        "%[casual]*%", player.NotFormalGreet);
+                    Storyboard.SetValue(i, s);
+                }
+
             }            
         }
 
@@ -142,6 +158,40 @@ namespace Depths.Interpreter
             if (state > Count - 1) return false;
             return Storyboard.GetKey(state) is Battle;
 
+        }
+
+
+
+        public string Save()
+        {
+            string s = "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[STORY]");
+            sb.AppendLine();
+            for (int i = 0; i < Storyboard.Count; i++)
+            {
+                sb.Append(DialogueToString(i));
+            }
+
+            for (int i = 0; i < Conditions.Count; i++)
+            {
+                sb.AppendLine(Conditions[i].Save());
+            }
+            sb.Append("[STORY]");
+
+            s = sb.ToString();      
+            return s;
+        }
+        private string DialogueToString(int i)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[DIALOGUE]");
+            sb.AppendLine();
+            sb.Append(String.Format("{0}:{1}", Storyboard.GetKey(i).Name, Storyboard.GetValue(i)));
+            sb.AppendLine();
+            sb.Append("[DIALOGUE]");
+            sb.AppendLine();
+            return sb.ToString();
         }
     }
 }

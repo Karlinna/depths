@@ -55,5 +55,10 @@ namespace Depths.Objects.Dependencies
 
         }
         public int GetSize() => Wearables.Count;
+
+        internal object Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

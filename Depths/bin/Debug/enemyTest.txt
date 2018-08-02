@@ -16,4 +16,5 @@ map_cond(9,6)
 player-"Shallow speak with only player speech."
 player-"Should it cause error if no narrator?"
 player-"Probably not."
+narr-"%formal% and %casual%"
 map_cond_end

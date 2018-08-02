@@ -15,7 +15,7 @@
         <Button Content="Right" HorizontalAlignment="Left" Margin="407,563,0,0" VerticalAlignment="Top" Width="138" Height="43" Click="Button_Click"/>
         <Button Content="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="92,563,0,0" Click="Button_Click"/>
         <Button x:Name="Attack" Content="Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="92,515,0,0" Click="Attack_Click"/>
-        <Button Content="Strong Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="407,515,0,0"/>
+        <Button Content="Strong Attack" HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" Height="43" Margin="407,515,0,0" Click="strongAttack_Click"/>
         <Button Content="Inv" HorizontalAlignment="Left" Margin="550,515,0,0" VerticalAlignment="Top" Width="40" Height="43"/>
         <Button Content="Act" HorizontalAlignment="Left" Margin="47,515,0,0" VerticalAlignment="Top" Width="40" Height="43" Click="actButtonClick"/>
         <TextBox x:Name="storyBox" HorizontalAlignment="Left" Height="350" Margin="10,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="644"/>

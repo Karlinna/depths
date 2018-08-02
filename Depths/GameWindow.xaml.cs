@@ -40,7 +40,7 @@ namespace Depths
             GetGameWindow = this;
             LoadMap();
             this.p = p;
-            playerName.Text = this.p.Name;
+            playerName.Text = String.Format("{0}({1})", p.Name, p.Level);
             playerImage.Source = new BitmapImage(new Uri(p.image_name,UriKind.RelativeOrAbsolute));
             p.LocX = 1;
             p.LocY = 1;
@@ -182,6 +182,13 @@ namespace Depths
         {
             HealthBar.Value = value;
         }
- 
+
+        private void strongAttack_Click(object sender, RoutedEventArgs e)
+        {
+            StreamWriter sw = new StreamWriter("testSave.sv");
+            sw.WriteLine(p.Save());
+            sw.WriteLine(s.Save());
+            sw.Close();
+        }
     }
 }

@@ -103,6 +103,8 @@
     <Compile Include="Objects\GameObjects\Weapon.cs" />
     <Compile Include="Objects\Gameplay\Battle.cs" />
     <Compile Include="Objects\Gameplay\BattleLogger.cs" />
+    <Compile Include="Objects\Gameplay\Leveling.cs" />
+    <Compile Include="Objects\Interfaces\ILevalable.cs" />
     <Compile Include="Objects\Interfaces\IMapCond.cs" />
     <Compile Include="Objects\Interfaces\IWearable.cs" />
     <Compile Include="Objects\Interfaces\IWearer.cs" />
@@ -122,8 +124,10 @@
     <Compile Include="Objects\Player\Gender.cs" />
     <Compile Include="Objects\Player\Player.cs" />
     <Compile Include="Objects\Player\PlayerClass.cs" />
+    <Compile Include="Objects\Player\PlayerVariables.cs" />
     <Compile Include="Objects\Player\Slots.cs" />
     <Compile Include="Objects\Structs\Attacker.cs" />
+    <Compile Include="Objects\Structs\CharacterSheet.cs" />
     <Compile Include="Objects\Structs\Healer.cs" />
     <Compile Include="Objects\Structs\ItemStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

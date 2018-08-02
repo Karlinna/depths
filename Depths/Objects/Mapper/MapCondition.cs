@@ -1,4 +1,5 @@
-﻿using Depths.Objects.Interfaces;
+﻿using Depths.Objects.Entities;
+using Depths.Objects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,28 @@ namespace Depths.Objects.Mapper
             this.mapCond = mapCond;
             StartIndex = si;
             EndIndex = ei;
+        }
+        public string Save()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[MAPCONDITION]");
+            sb.AppendLine();
+            sb.Append(String.Format("exists:{0}", Exists));
+            sb.AppendLine();
+            sb.Append(String.Format("startIndex:{0}", StartIndex));
+            sb.AppendLine();
+            sb.Append(String.Format("endIndex:{0}",EndIndex));
+            sb.AppendLine();
+            Enemy e = null;
+            Narrator n = null;
+            Character c = null;
+            if (mapCond is Enemy) e = (Enemy)mapCond;
+            else if (mapCond is Narrator) n = (Narrator)mapCond;
+            else if (mapCond is Character) c = (Character)mapCond;
+            sb.Append(e != null ? e.Save() : n != null ? n.Save() : c.Save());
+            sb.AppendLine();
+            sb.Append("[MAPCONDITION]");
+            return sb.ToString();
         }
     }
 }

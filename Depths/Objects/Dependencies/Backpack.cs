@@ -49,6 +49,9 @@ namespace Depths.Objects.Dependencies
             Items.Remove(Items[getA]);
         }
 
-
+        internal object Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
