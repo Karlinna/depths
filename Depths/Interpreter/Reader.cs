@@ -150,6 +150,19 @@ namespace Depths.Interpreter
                                 Battle b = new Battle((Player)s.p, x ?? e);
                                 s.AddStoryBoard(b, "Battle");
                             }
+                            else if (read.Contains("relate"))
+                            {
+                                string cutted = read.Replace("relate", "");
+                                cutted = cutted.Replace("(", "");
+                                cutted = cutted.Replace(")", "");
+                                cutted = cutted.Trim();
+                                string[] data_rel = cutted.Split(',');
+                                RelationTrigger rt = new RelationTrigger
+                                    (data_rel[0] == "F" ? RelationType.FRIENDSHIP : RelationType.ROMANCE,
+                                    int.Parse(data_rel[1]), n);
+                                s.AddStoryBoard(rt, "");
+                                count++;
+                            }
                             else
                             {
                                 string[] story = read.Split('-');

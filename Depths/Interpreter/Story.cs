@@ -67,9 +67,15 @@ namespace Depths.Interpreter
                     if (OpenedMap.EndIndex >= state)
                     {
                     if (state > Count - 1) return s;
-                    FirstEngaged = false;
-                        return String.Format("{0} - {1}", Storyboard.GetKey(state).Name,
-                       Storyboard.GetValue(state));
+                        FirstEngaged = false;
+                        if(Storyboard.GetKey(state).Name == "RelationTrigger")
+                        {
+                            RelationTrigger rt = (RelationTrigger)Storyboard.GetKey(state);
+                            rt.Activate();
+                            return "";
+                        }
+                       return String.Format("{0} - {1}", Storyboard.GetKey(state).Name,
+                         Storyboard.GetValue(state));
                     }
                     else
                     {

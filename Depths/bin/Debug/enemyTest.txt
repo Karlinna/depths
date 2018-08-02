@@ -18,3 +18,9 @@ player-"Should it cause error if no narrator?"
 player-"Probably not."
 narr-"%formal% and %casual%"
 map_cond_end
+
+map_cond(character:Jozsef, 6,1)
+player-"%target% is a cool guy, no?"
+target-"Oh, my..."
+relate(F,5)
+map_cond_end

@@ -1,4 +1,5 @@
-﻿using Depths.Objects.Interfaces;
+﻿using Depths.Objects.Entities;
+using Depths.Objects.Interfaces;
 using Depths.Objects.Player;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace Depths.Objects
         public int LocX { get ; set; }
 
         public Gender gender;
+        public Relationship Relationship;
 
         public Character(string n, Gender g)
         {
             Name = n;
             gender = g;
+            Relationship = new Relationship(RelationType.FRIENDSHIP, 0);
         }
 
         public object Clone()
